@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import Thumb from '../components/Thumb.astro';
+import animation from '../content/animation.json';
+import { embedUrl } from '../lib/media.js';
+---
+<Base title="Animation" description="Animation work by Isaiah Brown: Animate, After Effects, frame-by-frame.">
+  <div class="wrap">
+    <h1 class="page-title">Anim<span>ation</span></h1>
+    <p class="lede">Short films, loops, and motion pieces made in Adobe Animate and After Effects. Tap any piece to watch.</p>
+    <ul class="grid">
+      {animation.map((a) => (
+        <li>
+          <button
+            class="tile"
+            type="button"
+            data-lb="animation"
+            data-type="video"
+            data-src={embedUrl(a.video)}
+            data-title={a.title}
+            data-desc={a.description}
+            data-meta={a.year ? String(a.year) : undefined}
+          >
+            <Thumb file={a.thumbnail} alt="" />
+            <span class="play" aria-hidden="true">▶</span>
+            <span class="tile-text">
+              <strong>{a.title}</strong>
+              {a.year && <small>{a.year}</small>}
+            </span>
+            <span class="visually-hidden">, play video</span>
+          </button>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  }
+  .tile {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .tile:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .tile :global(img) { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform 0.4s ease; }
+  .tile:hover :global(img) { transform: scale(1.04); }
+  .play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -70%;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-size: 1.4rem;
+    padding-left: 4px;
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.4);
+    transition: transform 0.2s ease;
+  }
+  .tile:hover .play { transform: scale(1.1); }
+  .tile-text { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 14px 16px; }
+  .tile-text strong { font-size: 1.1rem; }
+  .tile-text small { color: var(--muted); }
+</style>

@@ -1,0 +1,16 @@
+---
+import { thumb, srcset, size } from '../lib/media.js';
+interface Props { file: string; alt: string; sizes?: string; eager?: boolean; }
+const { file, alt, sizes = '(min-width: 1000px) 33vw, (min-width: 600px) 50vw, 100vw', eager = false } = Astro.props;
+const { width, height } = size(file);
+---
+<img
+  src={thumb(file, 600)}
+  srcset={srcset(file)}
+  sizes={sizes}
+  width={width}
+  height={height}
+  alt={alt}
+  loading={eager ? 'eager' : 'lazy'}
+  decoding="async"
+/>

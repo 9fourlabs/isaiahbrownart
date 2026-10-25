@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import Thumb from '../components/Thumb.astro';
+import art from '../content/art.json';
+import { full } from '../lib/media.js';
+---
+<Base title="Art" description="Digital paintings, illustrations, and character designs by Isaiah Brown.">
+  <div class="wrap">
+    <h1 class="page-title">A<span>rt</span></h1>
+    <p class="lede">Digital paintings, character designs, and sketches, mostly made in Photoshop. Tap any piece to see it large.</p>
+    <ul class="masonry">
+      {art.map((p) => (
+        <li>
+          <a
+            href={full(p.image)}
+            data-lb="art"
+            data-type="image"
+            data-src={full(p.image)}
+            data-title={p.title}
+            data-desc={p.description}
+            data-alt={p.alt || p.title}
+          >
+            <Thumb file={p.image} alt={p.alt || p.title} />
+            <span class="cap">{p.title}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .masonry { list-style: none; margin: 0; padding: 0; columns: 1; column-gap: 16px; }
+  @media (min-width: 560px) { .masonry { columns: 2; } }
+  @media (min-width: 980px) { .masonry { columns: 3; } }
+  .masonry li { break-inside: avoid; margin-bottom: 16px; }
+  .masonry a {
+    display: block;
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+    color: var(--text);
+    text-decoration: none;
+  }
+  .masonry :global(img) { width: 100%; height: auto; transition: transform 0.4s ease; }
+  .masonry a:hover :global(img) { transform: scale(1.03); }
+  .cap {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 32px 14px 12px;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.8), transparent);
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .masonry a:hover .cap, .masonry a:focus-visible .cap { opacity: 1; }
+  @media (hover: none) { .cap { opacity: 1; } }
+</style>

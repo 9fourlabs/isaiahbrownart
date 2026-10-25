@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import Thumb from '../components/Thumb.astro';
+import handmade from '../content/handmade.json';
+import site from '../content/site.json';
+import { full } from '../lib/media.js';
+---
+<Base title="Made by Hand" description="Handmade and laser-engraved wood pieces by Isaiah Brown. Commissions open.">
+  <div class="wrap">
+    <h1 class="page-title">Made by <span>Hand</span></h1>
+    <p class="lede">
+      Woodwork and laser-engraved pieces, finished by hand with a lot of attention to the small stuff.
+      Some are for sale on <a href={site.links.etsy}>Etsy</a>; pieces marked <em>Commissions open</em> can be made to order.
+    </p>
+    <ul class="grid">
+      {handmade.map((p) => (
+        <li class="item">
+          <a
+            href={full(p.image)}
+            data-lb="handmade"
+            data-type="image"
+            data-src={full(p.image)}
+            data-title={p.title}
+            data-desc={p.description}
+            data-meta={p.materials}
+            data-alt={p.alt || p.title}
+            data-commission={String(Boolean(p.commission))}
+            class="img-link"
+          >
+            <Thumb file={p.image} alt={p.alt || p.title} />
+          </a>
+          <div class="body">
+            <h2>{p.title}</h2>
+            <p>{p.description}</p>
+            {p.materials && <p class="materials">{p.materials}</p>}
+            {p.commission && (
+              <p class="commission">
+                <span class="badge">Commissions open</span>
+                <a href="/contact/">Commission this →</a>
+              </p>
+            )}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  }
+  .item { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+  .img-link { display: block; overflow: hidden; }
+  .img-link :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 0.4s ease; }
+  .img-link:hover :global(img) { transform: scale(1.04); }
+  .body { padding: 16px 18px 20px; }
+  .body h2 { font-size: 1.25rem; margin-bottom: 6px; }
+  .body p { margin: 0 0 8px; color: var(--muted); }
+  .materials { font-size: 0.9rem; }
+  .commission { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px !important; }
+  .badge {
+    background: rgb(255 90 54 / 0.15);
+    color: var(--accent);
+    border: 1px solid rgb(255 90 54 / 0.4);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .commission a { font-weight: 700; }
+</style>

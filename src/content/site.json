@@ -1,0 +1,27 @@
+{
+  "name": "Isaiah Brown",
+  "tagline": "Animator, digital artist, and maker of small, careful things.",
+  "heroVideo": "hero-loop.mp4",
+  "heroPoster": "hero-poster.jpg",
+  "email": "hello@isaiahbrown.art",
+  "formspreeId": "YOUR_FORM_ID",
+  "links": {
+    "etsy": "https://www.etsy.com/shop/YOUR_SHOP",
+    "instagram": "https://www.instagram.com/YOUR_HANDLE",
+    "youtube": "https://www.youtube.com/@YOUR_CHANNEL"
+  },
+  "about": {
+    "photo": "about/isaiah.jpg",
+    "bio": [
+      "I'm Isaiah, an 18-year-old animator and digital artist from Conyers, Georgia.",
+      "I make short animations and illustrations in Photoshop, Animate, and After Effects. When I'm not at the screen, I'm in the shop building and laser-engraving wood pieces. I love the small details, whether that's a two-frame blink or a 0.5 mm engraved line.",
+      "I also love to cook, which is basically animation with better snacks."
+    ],
+    "skills": {
+      "Animation": ["Adobe Animate", "Adobe After Effects", "Frame-by-frame", "Motion graphics"],
+      "Art": ["Adobe Photoshop", "Digital painting", "Character design"],
+      "Making": ["Laser engraving", "Woodworking", "Finishing and sanding", "Fine detail work"]
+    }
+  },
+  "commissionNote": "Like this piece? I take commissions for custom versions. Send me a message with what you have in mind."
+}

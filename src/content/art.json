@@ -1,0 +1,9 @@
+[
+  { "title": "Neon Alley", "description": "Placeholder digital painting.", "image": "art/neon-alley.jpg" },
+  { "title": "Character Sheet", "description": "Placeholder character design.", "image": "art/character-sheet.jpg" },
+  { "title": "Tidepool", "description": "Placeholder color study.", "image": "art/tidepool.jpg" },
+  { "title": "Late Bus", "description": "Placeholder environment piece.", "image": "art/late-bus.jpg" },
+  { "title": "Self Portrait", "description": "Placeholder portrait.", "image": "art/self-portrait.jpg" },
+  { "title": "Robot Sketches", "description": "Placeholder sketch page.", "image": "art/robot-sketches.jpg" },
+  { "title": "Kitchen Light", "description": "Placeholder still life.", "image": "art/kitchen-light.jpg" }
+]

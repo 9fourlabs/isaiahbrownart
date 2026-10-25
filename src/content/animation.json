@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Bunny Morning",
+    "description": "Placeholder: a short character piece. Replace with Isaiah's own animation.",
+    "video": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "thumbnail": "animation/bunny-morning.jpg",
+    "year": 2026
+  },
+  {
+    "title": "Spring",
+    "description": "Placeholder: mood and color study.",
+    "video": "https://youtu.be/WhWc3b3KhnY",
+    "thumbnail": "animation/spring.jpg",
+    "year": 2026
+  },
+  {
+    "title": "Sintel",
+    "description": "Placeholder: action sequence and camera moves.",
+    "video": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+    "thumbnail": "animation/sintel.jpg",
+    "year": 2025
+  },
+  {
+    "title": "Vimeo example",
+    "description": "Placeholder showing a Vimeo link works too. Unlisted Vimeo links look like vimeo.com/123456789/abc123def.",
+    "video": "https://vimeo.com/1084537",
+    "thumbnail": "animation/vimeo-example.jpg",
+    "year": 2025
+  }
+]

@@ -1,0 +1,133 @@
+---
+import Base from '../layouts/Base.astro';
+import Thumb from '../components/Thumb.astro';
+import site from '../content/site.json';
+import animation from '../content/animation.json';
+import art from '../content/art.json';
+import handmade from '../content/handmade.json';
+
+const [first, ...rest] = site.name.split(' ');
+const sections = [
+  { href: '/animation/', label: 'Animation', count: animation.length, file: animation[0]?.thumbnail },
+  { href: '/art/', label: 'Art', count: art.length, file: art[0]?.image },
+  { href: '/made-by-hand/', label: 'Made by Hand', count: handmade.length, file: handmade[0]?.image },
+].filter((s) => s.file);
+---
+<Base>
+  <section class="hero">
+    <video
+      class="hero-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster={`/work/${site.heroPoster}`}
+      aria-hidden="true"
+    >
+      <source src={`/work/${site.heroVideo}`} type="video/mp4" />
+    </video>
+    <div class="hero-shade"></div>
+    <div class="wrap hero-text">
+      <h1>{first}<br /><span>{rest.join(' ')}</span></h1>
+      <p>{site.tagline}</p>
+      <div class="hero-cta">
+        <a class="btn" href="/animation/">See the work</a>
+        <a class="btn ghost" href="/contact/">Get in touch</a>
+      </div>
+    </div>
+    <button class="motion-toggle" type="button" aria-pressed="false">Pause animation</button>
+  </section>
+
+  <section class="wrap sections" aria-label="Portfolio sections">
+    {sections.map((s) => (
+      <a class="card" href={s.href}>
+        <Thumb file={s.file} alt="" />
+        <span class="card-label">{s.label} <small>{s.count} pieces</small></span>
+      </a>
+    ))}
+  </section>
+</Base>
+
+<script>
+  const video = document.querySelector<HTMLVideoElement>('.hero-video')!;
+  const toggle = document.querySelector<HTMLButtonElement>('.motion-toggle')!;
+  const setPaused = (paused: boolean) => {
+    paused ? video.pause() : video.play().catch(() => {});
+    toggle.setAttribute('aria-pressed', String(paused));
+    toggle.textContent = paused ? 'Play animation' : 'Pause animation';
+  };
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) setPaused(true);
+  toggle.addEventListener('click', () => setPaused(!video.paused));
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: min(88vh, 860px);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--bg) 0%, rgb(11 11 15 / 0.55) 45%, rgb(11 11 15 / 0.15) 100%);
+  }
+  .hero-text { position: relative; width: 100%; padding-bottom: clamp(48px, 8vw, 96px); }
+  .hero h1 {
+    font-size: clamp(3.4rem, 15vw, 11rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    line-height: 0.88;
+    margin: 0 0 20px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p { font-size: clamp(1.1rem, 2.4vw, 1.5rem); max-width: 36ch; margin: 0 0 28px; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .motion-toggle {
+    position: absolute;
+    top: 16px;
+    right: var(--gutter);
+    background: rgb(0 0 0 / 0.5);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .sections {
+    display: grid;
+    gap: 16px;
+    margin-top: clamp(32px, 6vw, 64px);
+  }
+  @media (min-width: 720px) { .sections { grid-template-columns: repeat(3, 1fr); } }
+  .card {
+    position: relative;
+    display: block;
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: var(--surface);
+    color: var(--text);
+    text-decoration: none;
+  }
+  .card :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+  .card:hover :global(img) { transform: scale(1.04); }
+  .card-label {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 40px 18px 16px;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.85), transparent);
+    font-weight: 900;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+  .card-label small { display: block; font-size: 0.85rem; font-weight: 600; color: var(--muted); text-transform: none; letter-spacing: 0; }
+  .card:hover .card-label { color: var(--accent); }
+</style>

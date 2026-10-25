@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Thumb from '../components/Thumb.astro';
+import site from '../content/site.json';
+const { about } = site;
+---
+<Base title="About" description={`About ${site.name}: animator, digital artist, and maker.`}>
+  <div class="wrap">
+    <h1 class="page-title">Ab<span>out</span></h1>
+    <div class="about">
+      <div class="photo">
+        <Thumb file={about.photo} alt={`Photo of ${site.name}`} sizes="(min-width: 860px) 400px, 100vw" eager />
+      </div>
+      <div>
+        {about.bio.map((para) => <p class="bio">{para}</p>)}
+        <h2 class="skills-title">Skills &amp; tools</h2>
+        <div class="skills">
+          {Object.entries(about.skills).map(([group, list]) => (
+            <div>
+              <h3>{group}</h3>
+              <ul>{list.map((s) => <li>{s}</li>)}</ul>
+            </div>
+          ))}
+        </div>
+        <p><a class="btn" href="/contact/">Work with me</a></p>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .about { display: grid; gap: clamp(24px, 5vw, 56px); }
+  @media (min-width: 860px) { .about { grid-template-columns: 400px 1fr; align-items: start; } }
+  .photo :global(img) { width: 100%; height: auto; border-radius: var(--radius); }
+  .bio { font-size: 1.15rem; max-width: 62ch; }
+  .bio:first-child { font-size: 1.4rem; font-weight: 700; }
+  .skills-title { margin-top: 40px; font-size: 1.6rem; text-transform: uppercase; }
+  .skills { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); margin-bottom: 32px; }
+  .skills h3 { color: var(--accent); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .skills ul { list-style: none; margin: 0; padding: 0; }
+  .skills li { padding: 6px 0; border-bottom: 1px solid var(--line); }
+</style>

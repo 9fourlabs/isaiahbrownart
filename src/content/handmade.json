@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Engraved Walnut Coasters",
+    "description": "Placeholder: set of four walnut coasters with a laser-engraved line pattern.",
+    "image": "handmade/walnut-coasters.jpg",
+    "materials": "Walnut, food-safe oil",
+    "commission": true
+  },
+  {
+    "title": "Maple Cutting Board",
+    "description": "Placeholder: end-grain board with an engraved monogram.",
+    "image": "handmade/maple-board.jpg",
+    "materials": "Hard maple",
+    "commission": true
+  },
+  {
+    "title": "Mini Character Plaque",
+    "description": "Placeholder: one of Isaiah's characters engraved into birch ply.",
+    "image": "handmade/character-plaque.jpg",
+    "materials": "Baltic birch",
+    "commission": false
+  },
+  {
+    "title": "Keepsake Box",
+    "description": "Placeholder: small box with a detailed engraved lid.",
+    "image": "handmade/keepsake-box.jpg",
+    "materials": "Cherry, brass hinges",
+    "commission": true
+  }
+]
