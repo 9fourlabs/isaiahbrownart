@@ -64,7 +64,7 @@ fly launch --copy-config --no-deploy
 
 - Say **yes** to using the existing `fly.toml`.
 - If the name `isaiahbrown-art` is taken, pick another; it updates `app` in `fly.toml`.
-- Region is Atlanta (`atl`). Say **no** to databases/Redis/etc.
+- Region is Ashburn, VA (`iad`); Fly retired Atlanta. Say **no** to databases/Redis/etc.
 
 ### 2. `fly deploy`
 
