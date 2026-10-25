@@ -1,7 +1,7 @@
 # Fly.io config. `fly launch` may ask to change the app name if it's taken;
 # if so, update `app` below to match.
 app = "isaiahbrown-art"
-primary_region = "atl"   # Atlanta
+primary_region = "iad"   # Ashburn, VA (atl is deprecated on Fly)
 
 [build]
 
