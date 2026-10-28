@@ -4,7 +4,7 @@ Portfolio site for Isaiah Brown: animation, digital art, and handmade/laser-engr
 
 Built with [Astro](https://astro.build) (static HTML, no server code), served by Caddy on Fly.io.
 
-- **Want to add a piece?** See **[ADDING-WORK.md](ADDING-WORK.md)**. It's two steps: drop an image in, add one entry.
+- **Want to add a piece?** Use the editor at [app.pagescms.org](https://app.pagescms.org) (set up by `.pages.yml`): pick Animation, Art, or Made by Hand, click **Add**, upload the image, fill in the title, **Save**. The site redeploys on its own a few minutes later. To do it by hand instead, see **[ADDING-WORK.md](ADDING-WORK.md)**.
 - Accent color, fonts, and spacing live at the top of `src/styles/global.css`.
 
 ## Project layout
@@ -140,6 +140,17 @@ fly tokens create deploy -x 999999h
 
 Copy the token, then in GitHub: repo **Settings → Secrets and variables → Actions → New repository secret**,
 name `FLY_API_TOKEN`, paste the token. Until that secret exists, the workflow will fail harmlessly; just deploy with `fly deploy`.
+
+## Editor for Isaiah (Pages CMS)
+
+`.pages.yml` configures [Pages CMS](https://pagescms.org), a free browser editor that saves straight to this repo.
+
+One-time setup (repo owner):
+1. Sign in at [app.pagescms.org](https://app.pagescms.org) with GitHub and install the Pages CMS GitHub App on the account that owns this repo (only this repo needs access).
+2. Open **isaiahbrownart** → **Settings → Collaborators** → invite Isaiah's email. He gets a sign-in link by email; no GitHub account needed.
+3. Make sure the `FLY_API_TOKEN` secret is set (see "Auto-deploy" above). Without it, edits are saved to GitHub but don't go live until someone runs `fly deploy`.
+
+Collaborators can add, edit, and remove pieces and upload images. They can't change the editor settings or invite others.
 
 ## Accessibility notes
 

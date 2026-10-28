@@ -1,0 +1,108 @@
+# Pages CMS (https://app.pagescms.org): a simple editor for adding work without touching code.
+# Saving in the editor commits to GitHub, and the Deploy to Fly.io workflow publishes it.
+
+media:
+  - name: animation
+    label: Animation thumbnails
+    input: public/work/animation
+    output: /work/animation
+    rename: safe
+    categories: [image]
+  - name: art
+    label: Art
+    input: public/work/art
+    output: /work/art
+    rename: safe
+    categories: [image]
+  - name: handmade
+    label: Made by Hand
+    input: public/work/handmade
+    output: /work/handmade
+    rename: safe
+    categories: [image]
+  - name: about
+    label: About photo
+    input: public/work/about
+    output: /work/about
+    rename: safe
+    categories: [image]
+
+settings:
+  commit:
+    identity: user
+
+content:
+  - name: animation
+    label: Animation
+    type: file
+    path: src/content/animation.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        type: string
+        required: true
+      - name: description
+        type: text
+      - name: video
+        label: Video link
+        type: string
+        required: true
+        description: YouTube or Vimeo link (unlisted is fine), e.g. https://youtu.be/AbCdEfGhIjK
+      - name: thumbnail
+        type: image
+        required: true
+        description: A still from the video, 16:9 works best.
+        options:
+          media: animation
+      - name: year
+        type: number
+
+  - name: art
+    label: Art
+    type: file
+    path: src/content/art.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        type: string
+        required: true
+      - name: description
+        type: text
+      - name: image
+        type: image
+        required: true
+        description: JPG or PNG, about 2000px on the long side.
+        options:
+          media: art
+      - name: alt
+        label: Alt text
+        type: string
+        description: One sentence describing the image for people using screen readers (optional).
+
+  - name: handmade
+    label: Made by Hand
+    type: file
+    path: src/content/handmade.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        type: string
+        required: true
+      - name: description
+        type: text
+      - name: image
+        type: image
+        required: true
+        options:
+          media: handmade
+      - name: materials
+        type: string
+      - name: commission
+        label: Open for commissions
+        type: boolean
+      - name: alt
+        label: Alt text
+        type: string

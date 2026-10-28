@@ -1,8 +1,13 @@
 import images from '../generated/images.json';
 
+// Accepts "art/x.jpg", "/work/art/x.jpg" or "work/art/x.jpg" (the editor writes the /work/ form).
+function rel(file) {
+  return file.replace(/^\/+/, '').replace(/^work\//, '');
+}
+
 // "art/sunset.jpg" -> "/thumbs/art/sunset-600.webp"
 export function thumb(file, width = 600) {
-  return `/thumbs/${file.replace(/\.(jpe?g|png|webp)$/i, '')}-${width}.webp`;
+  return `/thumbs/${rel(file).replace(/\.(jpe?g|png|webp)$/i, '')}-${width}.webp`;
 }
 
 export function srcset(file) {
@@ -10,11 +15,11 @@ export function srcset(file) {
 }
 
 export function full(file) {
-  return `/work/${file}`;
+  return `/work/${rel(file)}`;
 }
 
 export function size(file) {
-  const s = images[file];
+  const s = images[rel(file)];
   if (!s) throw new Error(`Image not found: public/work/${file} (check the spelling in your content file)`);
   return s;
 }
